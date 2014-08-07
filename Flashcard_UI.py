@@ -6,12 +6,12 @@ import ui
 written by Steven K. Pollack
            July 18, 2014
 
-This script is designed to display a set of image files, organized in a set of folders
-(chapters)
+This script is designed to display a set of image and/or their descriptions from files organized 
+in a set of folders (chapters)
 
 The program will display a set of selectors for the chapters (picture directories)
-The program allows either the name of the file (without the extension)the image, image or text randomly, 
-or both to be displayed randomly for study purposes
+The program allows either the descriptor, derived form the name of the file, the image, image or 
+text randomly, or both to be displayed randomly for study purposes
 
 Alternatively, the entire picture collection can be displayed in alphabetical order as a visual 
 dictionary.  A picture can have multiple desciptors.  To accomplish this, the file name should be
@@ -20,7 +20,7 @@ the descriptors separated by commas.  For example:
 	motor, engine.jpg
 	to run, to jog.png
 
-The folders and their files are imported into the pythonista "file structure" under a single folder"
+The folders and their files are imported into the pythonista "file structure" under a single folder
 
 
 View Components
@@ -75,11 +75,11 @@ def de_noise(descriptor): # if a list, assumes the first entry is a descriptor s
 		
 
 
-###########################
-###########################
+#################################################################
+#################################################################
 # Flashcard Mode call back routines
 
-##########################
+###############################
 #  View Mode Radio Button Group
 
 def on_mode_switch(switch): # choose display mode.  Force group of buttons to act as a radio button	
@@ -93,9 +93,9 @@ def on_mode_switch(switch): # choose display mode.  Force group of buttons to ac
 	
 
 
-#######
-# Next Button: main routine, picks next image accoring to the radion button and chapter selections
-# then displays accordingly
+############################################################################################
+# Next Button: the heart of the program, picks next image according to the radion button and 
+# chapter selections then displays accordingly
 
 def on_next(button):
 	global fullname
@@ -145,7 +145,7 @@ def on_next(button):
 			flashView['button_answer'].enabled = True
 			flashView['button_next'].enabled = False
 
-###########
+##############################
 # Answer Button 
 
 def on_answer(button): # displays the text or image (unless in both mode, then disbled) 
@@ -164,7 +164,7 @@ def on_answer(button): # displays the text or image (unless in both mode, then d
 	except:
 		pass
 
-##############
+##############################
 # Chapter ListView Select
 
 def isChecked(item): # is a checkbox set in a tableview items attribute
@@ -173,7 +173,7 @@ def isChecked(item): # is a checkbox set in a tableview items attribute
 	else:
 		return False
 		
-####################
+#####################################################################
 # Support routine to switch checkmark on and off in table view entry
 		
 def toggleChecked(items,row):
@@ -182,12 +182,13 @@ def toggleChecked(items,row):
 	else:
 		items[row]['accessory_type'] = 'checkmark'
 
-#####################
+##############################################
 # action for chapter select in flashcard mode
 		
 def on_chapter_select(chapter_table_data):
 	global selected
 	global tableView
+	
 	section,row = tableView.selected_row
 	toggleChecked(chapter_table_data.items,row)
 	tableView.reload_data()	
@@ -202,14 +203,17 @@ def on_dictionary(button):
 	global dictView
 	
 	navView.push_view(dictView)
-########################################
-########################################
+	
+	
+#######################################################
+#######################################################
 # dictionary view mode call back routines
 	
 ########################
 # Action on dictionary back button
 def on_dict_back(button):
 	global navView
+	
 	navView.pop_view()
 		
 		
@@ -218,6 +222,7 @@ def on_dict_back(button):
 
 def on_word_select(wordtable):
 	global dictView
+	
 	row = wordtable.selected_row
 	file = dictItems_list[row]['fname']
 	chapter = dictItems_list[row]['chapter']
@@ -240,11 +245,12 @@ def on_word_jump(button):
 #########################################################
 #########################################################
 #
-# Main Routines
+# Main program
+
 
 root_doc_dir = os.path.join(os.path.expanduser('~'),'Documents') 
 
-root_dir_path = os.path.join(root_doc_dir,'ASL')        # the root directors for the "chapter folders"
+root_dir_path = os.path.join(root_doc_dir,'ASL')        # the root directory for the "chapter folders"
 
 chapter_dir_dict = {}
 fullname = ''
