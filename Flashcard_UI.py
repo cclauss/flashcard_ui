@@ -327,7 +327,6 @@ dictTableView.data_source.items = dictItems_list
 dictTableView.data_source.action = on_word_select
 
 dictView['dict_flashcard'].content_mode = ui.CONTENT_SCALE_ASPECT_FIT
-
 dictView['button_dict_back'].enabled = True
 dictView['button_dict_back'].action = on_dict_back
 
